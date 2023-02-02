@@ -46,7 +46,7 @@ alr build
 ```
 
 ### Build (GPRBuild)
-```
+```console
 eval "$(alr printenv)"
 gprbuild hybrid_autosar_stm32f429_demo.gpr
 ```
