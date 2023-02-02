@@ -40,15 +40,20 @@ alr get hybrid_autosar_stm32f429_demo
 cd hybrid_autosar_stm32f429_demo*
 ```  
 
-### Build (Visual Studio Code)
+### Build (Terminal)
 ```console
 alr build
+```
+
+### Build (GPRBuild)
+```
+eval "$(alr printenv)"
+gprbuild hybrid_autosar_stm32f429_demo.gpr
 ```
 
 ### Build (GnatStudio)
 ```console
 eval "$(alr printenv)"
-gprbuild hybrid_autosar_stm32f429_demo.gpr
 gnatstudio hybrid_autosar_stm32f429_demo.gpr
 ```
 
