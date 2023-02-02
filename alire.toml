@@ -3,7 +3,7 @@ description = "Ada/Rust/C AUTOSAR demo on the stm32f429"
 version = "1.0.0"
 licenses = "BSD-3-Clause"
 
-tags = ["embedded", "AUTOSAR", "stm32"]
+tags = ["embedded", "autosar", "stm32"]
 website = "https://github.com/wolfbiters/hybrid_autosar_stm32f429_demo"
 
 authors = ["wolf biters"]
