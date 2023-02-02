@@ -4,7 +4,7 @@ package Cyclic_Temp is
 
    package TM renames Thermocouple_Max31856;
 
-   subtype MS_T is Integer range 0 .. 1_000;
+   subtype MS_T is Integer range 0 .. 10_000;
 
    procedure Create_Cycle (TC : TM.Thermocouple_Access_T; Freq : MS_T);
 
