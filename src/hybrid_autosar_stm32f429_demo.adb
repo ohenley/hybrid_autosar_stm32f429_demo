@@ -11,6 +11,8 @@ with LCD_Std_Out; use LCD_Std_Out;
 with Thermocouple_Max31856;
 with Cyclic_Temp;
 
+with STM32.Board;
+
 with Fan_3wires;
 with Fan_3wires.Interrupts;
 pragma Unreferenced (Fan_3wires.Interrupts);
@@ -37,12 +39,17 @@ procedure Hybrid_Autosar_Stm32f429_Demo is
         Chip_Select_Pin);
 
 begin
+   STM32.Board.Initialize_LEDs;
+
+   Fan_3wires.Initialize;
    Cyclic_Temp.Create_Cycle (TC'Unchecked_Access, Freq);
    loop
       TC_Temp := Cyclic_Temp.Get_Thermocouple_Temp;
       Count   := F3W.Get_Count;
       Clear_Screen;
       Put_Line (TC_Temp'Image);
-      Put_Line (Count'Image);
+      if Count > 0 then
+         Put_Line (Count'Image);
+      end if;
    end loop;
 end Hybrid_Autosar_Stm32f429_Demo;
