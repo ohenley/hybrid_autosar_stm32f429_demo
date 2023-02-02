@@ -22,7 +22,7 @@ sudo apt install openocd
 - Plug it to your computer using the [USB MIN B cable](https://www.reviewgeek.com/53587/usb-explained-all-the-different-types-and-what-theyre-used-for/)
 
 ### Add custom Alire index (IMPORTANT)
-The chain of crates used by this project is a reorganization of files found in [Ada_Bare_Metal_Demos](https://github.com/lambourg/Ada_Bare_Metal_Demos) and [Ada_Drivers_Library](https://github.com/AdaCore/Ada_Drivers_Library).
+The chain of crates used by this project is a reorganization of files found at [Ada_Drivers_Library](https://github.com/AdaCore/Ada_Drivers_Library).
 
 Install my forked Alire index named `testindex` locally:
 ```
