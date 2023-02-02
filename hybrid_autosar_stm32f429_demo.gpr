@@ -1,0 +1,31 @@
+with "config/hybrid_autosar_stm32f429_demo_config.gpr";
+with "config/stm32_config_config.gpr";
+project Hybrid_Autosar_Stm32f429_Demo is
+
+   for Target use "arm-eabi";
+   case Stm32_Config_Config.Runtime is
+      when "light_tasking" => 
+         for Runtime ("Ada") use "embedded-" & Stm32_Config_Config.Board;
+      when others =>
+         for Runtime ("Ada") use Stm32_Config_Config.Runtime & "-" & Stm32_Config_Config.Board;
+   end case;
+
+   for Source_Dirs use ("src/", "config/", "src/thermocouple_max31856", "src/fan_3wires");
+   for Object_Dir use "obj/" & Hybrid_Autosar_Stm32f429_Demo_Config.Build_Profile;
+   for Create_Missing_Dirs use "True";
+   for Exec_Dir use "bin";
+   for Main use ("hybrid_autosar_stm32f429_demo.adb");
+
+   package Compiler is
+      for Default_Switches ("Ada") use Hybrid_Autosar_Stm32f429_Demo_Config.Ada_Compiler_Switches;
+   end Compiler;
+
+   package Binder is
+      for Switches ("Ada") use ("-Es"); --  Symbolic traceback
+   end Binder;
+
+   package Install is
+      for Artifacts (".") use ("share");
+   end Install;
+
+end Hybrid_Autosar_Stm32f429_Demo;
