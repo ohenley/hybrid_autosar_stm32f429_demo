@@ -1,4 +1,4 @@
-# Hybrid_AUTOSAR_stm32f429_Demo (WIP)
+# Hybrid AUTOSAR stm32f429 Demo (WIP)
 
 Ada/Rust/C AUTOSAR demo on the stm32f429
 
