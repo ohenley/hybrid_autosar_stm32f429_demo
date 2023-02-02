@@ -4,7 +4,7 @@ with HAL.SPI; use HAL.SPI;
 with HAL.GPIO;
 
 with STM32.Device; use STM32.Device;
-with STM32.GPIO; use STM32.GPIO;
+with STM32.GPIO;   use STM32.GPIO;
 with STM32.SPI;
 
 with STM32; use STM32;
@@ -52,13 +52,11 @@ package Thermocouple_Max31856 is
 
    type Cold_Junction_Temp_T is delta 1.0 range -128.0 .. 127.0;
 
-   function Build_Thermocouple (Port            : in out STM32.SPI.SPI_Port;
-                                SPI_AF          : GPIO_Alternate_Function;
-                                SPI_SCK_Pin     : GPIO_Point;
-                                SPI_MISO_Pin    : GPIO_Point;
-                                SPI_MOSI_Pin    : GPIO_Point;
-                                Chip_Select_Pin : in out GPIO_Point)
-            return Thermocouple_T;
+   function Build_Thermocouple
+     (Port : in out STM32.SPI.SPI_Port; SPI_AF : GPIO_Alternate_Function;
+      SPI_SCK_Pin  :        GPIO_Point; SPI_MISO_Pin : GPIO_Point;
+      SPI_MOSI_Pin :        GPIO_Point; Chip_Select_Pin : in out GPIO_Point)
+      return Thermocouple_T;
 
    procedure Set_Thermocouple_Type
      (This : in out Thermocouple_T; T_type : Thermocouple_Type_T);
@@ -67,15 +65,16 @@ package Thermocouple_Max31856 is
 
    procedure Set_One_Shot_Mode (This : in out Thermocouple_T);
 
-   function Get_One_Shot_Mode (This : in out Thermocouple_T) return One_Shot_Mode_T;
+   function Get_One_Shot_Mode
+     (This : in out Thermocouple_T) return One_Shot_Mode_T;
 
    function Retrieve_Thermocouple_Temp
      (This : in out Thermocouple_T) return Thermocouple_Temp_T;
 
 private
 
-   type Thermocouple_T is record 
-      Port         : not null HAL.SPI.Any_SPI_Port; 
+   type Thermocouple_T is record
+      Port         : not null HAL.SPI.Any_SPI_Port;
       SPI_AF       : GPIO_Alternate_Function;
       SPI_SCK_Pin  : GPIO_Point;
       SPI_MISO_Pin : GPIO_Point;

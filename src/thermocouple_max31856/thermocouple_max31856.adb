@@ -1,7 +1,7 @@
 with STM32;
 
-with Ada.Real_Time;   use Ada.Real_Time;
-with STM32.Board;     use STM32.Board;
+with Ada.Real_Time; use Ada.Real_Time;
+with STM32.Board;   use STM32.Board;
 
 package body Thermocouple_Max31856 is
 
@@ -85,7 +85,7 @@ package body Thermocouple_Max31856 is
 
    function IO_Read
      (This : in out Thermocouple_T; Nbr_Bytes_To_Read : Positive;
-      Addr : Register_Address) return SPI_Data_8b
+      Addr :        Register_Address) return SPI_Data_8b
    is
       Status  : SPI_Status;
       Request : constant SPI_Data_8b (1 .. 1)        := (1 => BT.UInt8 (Addr));
@@ -104,13 +104,12 @@ package body Thermocouple_Max31856 is
       return Data;
    end IO_Read;
 
-   function Build_Thermocouple (Port            : in out STM32.SPI.SPI_Port;
-                                SPI_AF          : GPIO_Alternate_Function;
-                                SPI_SCK_Pin     : GPIO_Point;
-                                SPI_MISO_Pin    : GPIO_Point;
-                                SPI_MOSI_Pin    : GPIO_Point;
-                                Chip_Select_Pin : in out GPIO_Point)
-            return Thermocouple_T is
+   function Build_Thermocouple
+     (Port : in out STM32.SPI.SPI_Port; SPI_AF : GPIO_Alternate_Function;
+      SPI_SCK_Pin  :        GPIO_Point; SPI_MISO_Pin : GPIO_Point;
+      SPI_MOSI_Pin :        GPIO_Point; Chip_Select_Pin : in out GPIO_Point)
+      return Thermocouple_T
+   is
       procedure Init_SPI is
          use STM32.SPI;
          Config : SPI_Configuration;
@@ -139,20 +138,16 @@ package body Thermocouple_Max31856 is
       begin
          Enable_Clock (SPI_Points);
 
-         Configure_IO (SPI_Points,
-            (Mode_AF,
-             AF             => SPI_AF,
-             Resistors      => Floating,
-             AF_Speed       => Speed_50MHz,
-             AF_Output_Type => Push_Pull));
+         Configure_IO
+           (SPI_Points,
+            (Mode_AF, AF => SPI_AF, Resistors => Floating,
+             AF_Speed    => Speed_50MHz, AF_Output_Type => Push_Pull));
 
          Enable_Clock (Chip_Select_Pin);
 
          Chip_Select_Pin.Configure_IO
-           ((Mode_Out,
-            Resistors   => Pull_Up,
-            Output_Type => Push_Pull,
-            Speed       => Speed_25MHz));
+           ((Mode_Out, Resistors => Pull_Up, Output_Type => Push_Pull,
+             Speed               => Speed_25MHz));
 
          Chip_Select_Pin.Set;
 
@@ -161,7 +156,9 @@ package body Thermocouple_Max31856 is
    begin
       Init_GPIO;
       Init_SPI;
-      return (Port'Unchecked_Access, SPI_AF, SPI_SCK_Pin, SPI_MISO_Pin, SPI_MOSI_Pin, Chip_Select_Pin);
+      return
+        (Port'Unchecked_Access, SPI_AF, SPI_SCK_Pin, SPI_MISO_Pin,
+         SPI_MOSI_Pin, Chip_Select_Pin);
    end Build_Thermocouple;
 
    procedure Set_Thermocouple_Type
@@ -197,7 +194,9 @@ package body Thermocouple_Max31856 is
       IO_Write (This, Raw_Register, CR0);
    end Set_One_Shot_Mode;
 
-   function Get_One_Shot_Mode (This : in out Thermocouple_T) return One_Shot_Mode_T is
+   function Get_One_Shot_Mode
+     (This : in out Thermocouple_T) return One_Shot_Mode_T
+   is
       CR0_Register : CR0_T;
       Raw_Register : SPI_Data_8b (1 .. 1) with
          Address => CR0_Register'Address;
