@@ -37,7 +37,7 @@ alr index --del testindex
 ### Fetch 
 ```console
 alr get hybrid_autosar_stm32f429_demo
-cd hybrid_autosar_stm32f429_demo*
+cd hybrid_autosar_stm32f429_demo
 ```  
 
 ### Build (Visual Studio Code)
