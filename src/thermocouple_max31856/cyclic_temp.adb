@@ -1,6 +1,19 @@
 with Ada.Real_Time;
 
+with Interfaces.C; use Interfaces.C;
+
+with STM32.Board;
+
 package body Cyclic_Temp is
+
+   procedure init_led;
+   pragma Import (C, init_led, "init_led");
+   
+   procedure toggle_led_off;
+   pragma Import (C, toggle_led_off, "toggle_led_off");
+   
+   procedure toggle_led_on;
+   pragma Import (C, toggle_led_on, "toggle_led_on");
 
    TC_Max31856 : TM.Thermocouple_Access_T := null;
 
@@ -41,6 +54,11 @@ package body Cyclic_Temp is
       Period : constant Time_Span := Milliseconds (Temp.Get_Update_Frequency);
       Next_Release : Time;
    begin
+
+      
+      init_led;
+      toggle_led_on;
+
       while TC_Max31856 = null loop
          delay 0.1;
       end loop;

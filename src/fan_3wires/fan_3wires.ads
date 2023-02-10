@@ -9,12 +9,13 @@ package Fan_3wires is
    package BT renames Beta_Types;
 
    procedure Initialize;
+   procedure Initialize_Encoder;
 
-   function Get_Count return BT.UInt32;
-   procedure Get_Timer_Count;
+   function Get_Fan_Encoder_Freq return BT.UInt32;
+   procedure Save_Timer_Count;
 
 private
-   Encoder_Tach  : constant GPIO_Point                    := PA8;
+   Encoder_Tach  : constant GPIO_Point                    :=  PA5; -- PB3;
    Encoder_Timer : Timer renames Timer_2;
    Encoder_AF    : constant STM32.GPIO_Alternate_Function := GPIO_AF_TIM2_1;
 

@@ -16,8 +16,7 @@ package body Fan_3wires.Interrupts is
          if Status (Timer_2, Timer_CC1_Indicated) then
             if Interrupt_Enabled (Timer_2, Timer_CC1_Interrupt) then
                Clear_Pending_Interrupt (Timer_2, Timer_CC1_Interrupt);
-               fan_3wires.Get_Timer_Count;
-               STM32.Board.All_LEDs_On;
+               fan_3wires.Save_Timer_Count;
             end if;
          end if;
       end IRQ_Handler;
