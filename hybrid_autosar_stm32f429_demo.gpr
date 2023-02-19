@@ -16,6 +16,8 @@ project Hybrid_Autosar_Stm32f429_Demo is
                         "config/", 
                         "src/thermocouple_max31856", 
                         "src/fan_3wires",
+                        "src/engine",
+                        "src/power_command",
                         "src/c/");
    for Object_Dir use "obj/" & Hybrid_Autosar_Stm32f429_Demo_Config.Build_Profile;
    

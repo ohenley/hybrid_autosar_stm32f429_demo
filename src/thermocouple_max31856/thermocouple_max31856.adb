@@ -212,6 +212,9 @@ package body Thermocouple_Max31856 is
       Array_Temp : SPI_Data_8b (1 .. 3) :=
         (Temp_Array (3), Temp_Array (2), Temp_Array (1));
 
+      --  Array_Temp : SPI_Data_8b (1 .. 3) :=
+      --    (Temp_Array (1), Temp_Array (2), Temp_Array (3));
+
       type Temp_T is record
          DUMMY : BT.UInt5;
          TEMP  : BT.UInt18;

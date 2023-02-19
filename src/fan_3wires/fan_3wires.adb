@@ -33,6 +33,18 @@ package body Fan_3wires is
    --     Count := Current_Counter (Encoder_Timer);
    --     Set_Counter (Encoder_Timer, Reset_Value);
    --  end Save_Timer_Count;
+   
+   procedure Initialize_PWM_Fan is
+   begin
+      STM32.PWM.Configure_PWM_Timer (PWM_Output_Timer'Access, PWM_Frequency);
+      PWM_Output_Fan.Attach_PWM_Channel
+        (Generator => PWM_Output_Timer'Access,
+         Channel   => Channel_1,
+         Point     => PWM_Fan,
+         PWM_AF    => PWM_Output_AF);
+      PWM_Output_Fan.Set_Duty_Cycle (0);
+      PWM_Output_Fan.Enable_Output;
+   end Initialize_PWM_Fan;
 
    procedure Initialize is
    begin
@@ -69,58 +81,13 @@ package body Fan_3wires is
 
       Enable (Encoder_Timer);
    end Initialize;
-
-   procedure Initialize_Encoder is
-      Configuration : GPIO_Port_Configuration;
-
-      Debounce_Filter : constant Timer_Input_Capture_Filter := 6;
-      --  See the STM32 RM, pg 561, re: ICXF, to set the input filtering.
-
-      Period : constant UInt32 := UInt32'Last;
+   
+   procedure Set_Duty (Duty : STM32.PWM.Percentage) is
    begin
+      PWM_Output_Fan.Set_Duty_Cycle (Duty);
+   end;
 
-      Enable_Clock (Encoder_Tach);
-      Enable_Clock (Encoder_Timer);
-
-      Configure_IO
-        (Encoder_Tach,
-         (Mode           => Mode_AF,
-          AF             => Encoder_AF,
-          Resistors      => Pull_Up,
-          AF_Output_Type => Push_Pull,
-          AF_Speed       => Speed_50MHz));
-
-      Encoder_Tach.Lock;
-
-      Configure
-        (Encoder_Timer,
-         Prescaler     => 0,
-         Period        => Period,
-         Clock_Divisor => Div1,
-         Counter_Mode  => Up);
-
-      Configure_As_External_Clock (This => Encoder_Timer, 
-                                   Source =>  Filtered_Timer_Input_2, 
-                                   Polarity =>  Rising, 
-                                   Filter => Debounce_Filter);
-
-      Configure_Channel_Input
-        (Encoder_Timer,
-         Channel   => Channel_1,
-         Polarity  => Rising,
-         Selection => Direct_TI,
-         Prescaler => Div1,
-         Filter    => Debounce_Filter);
-
-      Set_Autoreload (Encoder_Timer, Period);
-
-      Enable_Channel (Encoder_Timer, Channel_1);
-
-      Set_Counter (Encoder_Timer, UInt32'(0));
-
-      Enable (Encoder_Timer);
-   end Initialize_Encoder;
-
---  begin
---   Initialize;
+begin
+   -- Initialize_PWM_Fan;
+   Initialize;
 end Fan_3wires;
