@@ -21,7 +21,7 @@ with Fan_3wires;
 with Fan_3wires.Interrupts;
 pragma Unreferenced (Fan_3wires.Interrupts);
 
-with Power_Command;
+-- with Power_Command;
 with Engine;
 with STM32.PWM;
 
@@ -29,8 +29,10 @@ with Bitmapped_Drawing;
 with Cortex_M.Cache;
 with HAL.Bitmap;
 
-
 with Ada.Characters.Latin_1; use Ada.Characters.Latin_1;
+
+with Simple_Adc;
+with RTE;
 
 procedure Hybrid_Autosar_Stm32f429_Demo is
 
@@ -98,17 +100,31 @@ procedure Hybrid_Autosar_Stm32f429_Demo is
          end if;
       end;
 
+      --  procedure Run_Engine is
+      --     Voltage : UInt32 := Power_Command.Get_Milli_Voltage;
+      --     Duty : STM32.PWM.Percentage := STM32.PWM.Percentage (-0.006666667*Float (Voltage) + 100.0);
+      --  begin
+      --     if Duty <= 20 then
+      --        Duty := 0;
+      --     end if;
+      --     Engine.Set_Duty (Duty);
+      --     Log_To_LCD ("Voltage:" & Voltage'Image,
+      --                 "Duty:" & Duty'Image,
+      --                 "Temp:" & TC_Temp'Image);
+      --  end;
+      
       procedure Run_Engine is
-         Voltage : UInt32 := Power_Command.Get_Milli_Voltage; 
-         Duty : STM32.PWM.Percentage := STM32.PWM.Percentage (-0.006666667*Float (Voltage) + 100.0);
+         function Read_ADC_Value (G : Simple_Adc.Group_T; 
+                                  V : access Simple_Adc.Data_T) return Simple_Adc.Status_T
+            with
+               Import        => True,
+               Convention    => C,
+               External_Name => "Adc_ReadGroup";
+
+         Value : aliased Simple_Adc.Data_T := 0;
+         Result : Simple_Adc.Status_T := Read_ADC_Value (1, Value'Unchecked_Access);     
       begin
-         if Duty <= 20 then
-            Duty := 0;
-         end if;
-         Engine.Set_Duty (Duty);
-         Log_To_LCD ("Voltage:" & Voltage'Image, 
-                     "Duty:" & Duty'Image,
-                     "Temp:" & TC_Temp'Image);
+         Log_To_LCD ("Value:" & Value'Image, "", "");
       end;
       
       type Fixed is delta 0.1 range -1.0e6 .. 1.0e6;
@@ -121,6 +137,8 @@ begin
    LCD_Std_Out.Set_Orientation (Landscape);
 
    Fan_3wires.Initialize_PWM_Fan;
+   RTE.Init_ADC;
+   Simple_Adc.Start_Group_Conversion (1);
 
    Cyclic_Temp.Create_Cycle (TC'Unchecked_Access, TC_Cycle_Freq);
 
