@@ -34,6 +34,8 @@ with Ada.Characters.Latin_1; use Ada.Characters.Latin_1;
 with Simple_Adc;
 with RTE;
 
+with Textures.Autosar;
+
 procedure Hybrid_Autosar_Stm32f429_Demo is
 
    package TM renames Thermocouple_Max31856;
@@ -62,23 +64,29 @@ procedure Hybrid_Autosar_Stm32f429_Demo is
       LCD_Std_Out.Set_Orientation (Landscape);
       Cortex_M.Cache.Invalidate_DCache (Buf'Address, Buf.Buffer_Size);
       Buf.Fill;
+      Bitmapped_Drawing.Draw_Texture
+        (Buffer     => Buf,
+         Start      => (0, 0),
+         Tex        => Textures.Autosar.Bmp,
+         Foreground => HAL.Bitmap.White,
+         Background => HAL.Bitmap.Transparent);
       Bitmapped_Drawing.Draw_String
               (Buffer     => Buf,
-               Start      => (0, 0),
+               Start      => (0, 36),
                Msg        => Temp,
                Font       => BMP_Fonts.Font16x24,
                Foreground => HAL.Bitmap.White,
                Background => HAL.Bitmap.Transparent);
       Bitmapped_Drawing.Draw_String
               (Buffer     => Buf,
-               Start      => (0, 24),
+               Start      => (0, 60),
                Msg        => Voltage,
                Font       => BMP_Fonts.Font16x24,
                Foreground => HAL.Bitmap.White,
                Background => HAL.Bitmap.Transparent);
       Bitmapped_Drawing.Draw_String
               (Buffer     => Buf,
-               Start      => (0, 48),
+               Start      => (0, 84),
                Msg        => Duty,
                Font       => BMP_Fonts.Font16x24,
                Foreground => HAL.Bitmap.White,
@@ -122,9 +130,16 @@ procedure Hybrid_Autosar_Stm32f429_Demo is
                External_Name => "Adc_ReadGroup";
 
          Value : aliased Simple_Adc.Data_T := 0;
-         Result : Simple_Adc.Status_T := Read_ADC_Value (1, Value'Unchecked_Access);     
+         Result : Simple_Adc.Status_T := Read_ADC_Value (1, Value'Unchecked_Access);
+         Duty : STM32.PWM.Percentage := STM32.PWM.Percentage (-0.006666667*Float (Value) + 100.0);
       begin
-         Log_To_LCD ("Value:" & Value'Image, "", "");
+         if Duty <= 20 then
+            Duty := 0;
+         end if;
+         Engine.Set_Duty (Duty);
+         Log_To_LCD ("Voltage:" & Value'Image,
+                     "Duty:" & Duty'Image,
+                     "Temp:" & TC_Temp'Image);
       end;
       
       type Fixed is delta 0.1 range -1.0e6 .. 1.0e6;

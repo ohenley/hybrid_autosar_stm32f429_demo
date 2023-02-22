@@ -35,8 +35,9 @@ package body Simple_Adc is
    end Start_Group_Conversion;
 
    function Read_Group (Group : Group_T; Data : in out Data_T) return Status_T is
+    Voltage : UInt32 := ((UInt32 (Counts) * 4) * ADC_Supply_Voltage) / 16#FFF#;
    begin
-      Data := IC.Unsigned (Counts);
+      Data := IC.Unsigned (Voltage);
       return Ok;
    end Read_Group;
 end Simple_Adc;
