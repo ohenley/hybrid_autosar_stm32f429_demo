@@ -4,11 +4,11 @@ version = "1.0.0"
 licenses = "BSD-3-Clause"
 
 tags = ["embedded", "autosar", "stm32"]
-website = "https://github.com/wolfbiters/hybrid_autosar_stm32f429_demo"
+website = "https://github.com/ohenley/hybrid_autosar_stm32f429_demo"
 
-authors = ["wolf biters"]
-maintainers = ["wolf biters <the.wolf.biters@gmail.com>"]
-maintainers-logins = ["wolfbiters"]
+authors = ["olivier henley"]
+maintainers = ["olivier henley <olivier.henleys@gmail.com>"]
+maintainers-logins = ["ohenley"]
 
 executables = ["hybrid_autosar_stm32f429_demo"]
 
