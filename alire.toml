@@ -1,14 +1,14 @@
 name = "hybrid_autosar_stm32f429_demo"
-description = "Ada/Rust/C AUTOSAR demo on the stm32f429"
+description = "Ada/C AUTOSAR demo on the stm32f429"
 version = "1.0.0"
 licenses = "BSD-3-Clause"
 
 tags = ["embedded", "autosar", "stm32"]
-website = "https://github.com/wolfbiters/hybrid_autosar_stm32f429_demo"
+website = "https://github.com/ohenley/hybrid_autosar_stm32f429_demo"
 
-authors = ["wolf biters"]
-maintainers = ["wolf biters <the.wolf.biters@gmail.com>"]
-maintainers-logins = ["wolfbiters"]
+authors = ["olivier henley"]
+maintainers = ["olivier henley <olivier.henley@gmail.com>"]
+maintainers-logins = ["ohenley"]
 
 executables = ["hybrid_autosar_stm32f429_demo"]
 
@@ -20,6 +20,8 @@ generate_c = true
 generate_gpr = true
 output_dir = "config"
 [configuration.values]
+
+
 [configuration.values.arm_cortex]
 core = "m4f"
 [configuration.values.stm32_config]
