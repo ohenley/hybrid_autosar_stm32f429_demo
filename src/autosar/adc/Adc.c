@@ -2,7 +2,7 @@
 #include "Std_Types.h"
 
 /* Function to start ADC Conversion */
-extern Ada_Adc_Start_Group_Conversion (Adc_GroupType Group);
+extern void Ada_Adc_Start_Group_Conversion (Adc_GroupType Group);
 void Adc_StartGroupConversion( Adc_GroupType Group )
 {
   Ada_Adc_Start_Group_Conversion (Group);

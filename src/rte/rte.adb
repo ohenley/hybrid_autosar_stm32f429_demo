@@ -4,6 +4,8 @@ with STM32.ADC;  use STM32.ADC;
 with STM32.DMA;  use STM32.DMA;
 with STM32.GPIO; use STM32.GPIO;
 
+with Engine;
+
 package body RTE is
    procedure Init_ADC is
 
@@ -74,4 +76,9 @@ package body RTE is
       Initialize_DMA;
       Initialize_ADC;
    end Init_ADC;
+
+   procedure Init_PWM is
+   begin
+        Engine.Initialize_PWM_Engine;
+   end;
 end RTE;

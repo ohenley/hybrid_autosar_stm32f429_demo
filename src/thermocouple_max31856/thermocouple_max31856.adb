@@ -7,10 +7,10 @@ package body Thermocouple_Max31856 is
 
    type Register_Address is new BT.UInt8;
 
-   CR0 : constant Register_Address := 16#00#; -- Configuration 0 Register
+   CR0 : constant Register_Address := 16#00#;          -- Configuration 0 Register
    CR0_Default : constant                  := 16#00#;
 
-   CR1 : constant Register_Address := 16#01#; -- Configuration 1 Register
+   CR1 : constant Register_Address := 16#01#;          -- Configuration 1 Register
    CR1_Default : constant                  := 16#03#;
 
    MASK         : constant Register_Address := 16#02#; -- Fault Mask Register
