@@ -2,7 +2,7 @@
 
 Ada/Rust/C AUTOSAR demo on the stm32f429
 
-![demo](https://raw.githubusercontent.com/ohenley/hybrid_autosar_stm32f429_demo/main/circuit_and_dom/autosar_demo_web.png) 
+![demo](https://github.com/ohenley/hybrid_autosar_stm32f429_demo/blob/main/circuit_and_bom/autosar_demo_web.png?raw=true) 
 
 ### Prerequesite (tested on linux ubuntu 20.04 only)
 
