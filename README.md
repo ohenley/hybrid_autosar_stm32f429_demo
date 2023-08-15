@@ -1,4 +1,4 @@
-# Hybrid AUTOSAR stm32f429 Demo (WIP)
+# Hybrid AUTOSAR stm32f429 Demo
 
 Ada/Rust/C AUTOSAR demo on the stm32f429
 
@@ -18,7 +18,7 @@ sudo apt install openocd
 ```
 
 #### STM32f429 Discovery board
-![stm32f429disco](https://raw.githubusercontent.com/wolfbiters/blinky_stm32f429disco/main/stm32f429disco.jpg)   
+![stm32f429disco](https://raw.githubusercontent.com/ohenley/blinky_stm32f429disco/main/stm32f429disco.jpg)   
 - Plug it to your computer using the [USB MIN B cable](https://www.reviewgeek.com/53587/usb-explained-all-the-different-types-and-what-theyre-used-for/)
 
 ### Add custom Alire index (IMPORTANT)
@@ -26,7 +26,7 @@ The chain of crates used by this project is a reorganization of files found at [
 
 Install my forked Alire index named `testindex` locally:
 ```
-alr index --add git+https://github.com/wolfbiters/alire-index.git#stable-1.2.1 --name testindex
+alr index --add git+https://github.com/ohenley/alire-index.git#stable-1.2.1 --name testindex
 ```
 
 When you are done, you can delete it:
@@ -62,3 +62,7 @@ gnatstudio hybrid_autosar_stm32f429_demo.gpr
 ```console
 openocd -f /usr/local/share/openocd/scripts/board/stm32f429disc1.cfg -c 'program bin/hybrid_autosar_stm32f429_demo verify reset exit'
 ```    
+
+### Circuit and BOM
+
+Look in the `circuit_and_bom` folder. You should find an up to date list of the components used and the circuit to build around the stm32f429 disco board. Please make a PR if you identify and fix errors.

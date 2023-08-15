@@ -195,11 +195,6 @@ begin
    Cyclic_Temp.Create_Cycle (TC'Unchecked_Access, TC_Cycle_Freq);
 
    loop
-    --    To_LCD ("Pwm_SetDutyCycle(" & "Sliced_PWM1" &")",
-    --            "Pwm_SetDutyCycle(" & "Sliced_PWM2" &")",
-    --            "Adc_ReadGroup(0," & I'Image & ")",
-    --            "Motor Temp:" & I'Image & "C",
-    --            True);
       Run_Demo;
    end loop;
 
