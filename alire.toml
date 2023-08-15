@@ -1,9 +1,22 @@
 name = "hybrid_autosar_stm32f429_demo"
 description = "Ada/C AUTOSAR demo on the stm32f429"
 version = "1.0.0"
-licenses = "BSD-3-Clause"
 
-tags = ["embedded", "autosar", "stm32"]
+
+licenses = "BSD-3-Clause"
+maintainers = [
+"olivier henley <olivier.henley@gmail.com>",
+]
+maintainers-logins = [
+"ohenley",
+]
+name = "hybrid_autosar_stm32f429_demo"
+tags = [
+"embedded",
+"autosar",
+"stm32",
+]
+version = "1.0.0"
 website = "https://github.com/ohenley/hybrid_autosar_stm32f429_demo"
 
 authors = ["olivier henley"]
@@ -28,16 +41,14 @@ core = "m4f"
 board = "stm32f429disco"
 mcu = "stm32f429x"
 runtime = "embedded"
-
 [[depends-on]]
 arm_cortex = "1.0.0"
 beta_types = "1.0.0"
 gnat_arm_elf = "^12"
 hal_embedded = "1.0.0"
 stm32_boards = "1.0.0"
-stm32_graphics = "1.0.0"
 stm32_components = "1.0.0"
 stm32_drivers = "1.0.0"
+stm32_graphics = "1.0.0"
 stm32_svd = "1.0.0"
-
 

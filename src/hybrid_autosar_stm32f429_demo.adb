@@ -186,29 +186,21 @@ procedure Hybrid_Autosar_Stm32f429_Demo is
       Run_Fan;
       Run_Motor;
    end Run_Demo;
-
-   --package MyVector is new Ada.Containers.Vectors(Index_Type   => Natural,
-   --                                              Element_Type => Integer);
-   --MV : MyVector.Vector;
-   I : Integer := 0;
 begin
-   --  LCD_Std_Out.Set_Orientation (Landscape);
-   --  Fan_3wires.Initialize_PWM_Fan;
-   --  RTE.Init_ADC;
-   --  RTE.Init_PWM;
-   --  Simple_Adc.Start_Group_Conversion (1);
-   --  Cyclic_Temp.Create_Cycle (TC'Unchecked_Access, TC_Cycle_Freq);
+   LCD_Std_Out.Set_Orientation (Landscape);
+   Fan_3wires.Initialize_PWM_Fan;
+   RTE.Init_ADC;
+   RTE.Init_PWM;
+   Simple_Adc.Start_Group_Conversion (1);
+   Cyclic_Temp.Create_Cycle (TC'Unchecked_Access, TC_Cycle_Freq);
 
    loop
-      I := I + 1;
-      --MV.Append (I);
-      delay 0.5;
-      To_LCD ("Pwm_SetDutyCycle(" & "Sliced_PWM1" &")",
-                 "Pwm_SetDutyCycle(" & "Sliced_PWM2" &")",
-                 "Adc_ReadGroup(0," & I'Image & ")",
-                 "Motor Temp:" & I'Image & "C",
-                 True);
-      --Run_Demo;
+    --    To_LCD ("Pwm_SetDutyCycle(" & "Sliced_PWM1" &")",
+    --            "Pwm_SetDutyCycle(" & "Sliced_PWM2" &")",
+    --            "Adc_ReadGroup(0," & I'Image & ")",
+    --            "Motor Temp:" & I'Image & "C",
+    --            True);
+      Run_Demo;
    end loop;
 
 end Hybrid_Autosar_Stm32f429_Demo;
