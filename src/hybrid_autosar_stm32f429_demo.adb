@@ -45,9 +45,10 @@ procedure Hybrid_Autosar_Stm32f429_Demo is
    Port            : SPI_Port renames SPI_4;
    SPI_AF          : STM32.GPIO_Alternate_Function renames GPIO_AF_SPI4_5;
    SPI_SCK_Pin     : GPIO_Point renames PE2;
+   Chip_Select_Pin : GPIO_Point renames PE3;
    SPI_MISO_Pin    : GPIO_Point renames PE5;
    SPI_MOSI_Pin    : GPIO_Point renames PE6;
-   Chip_Select_Pin : GPIO_Point renames PE3;
+   
 
    TC : aliased TM.Thermocouple_T := TM.Build_Thermocouple
                                      (Port, 
