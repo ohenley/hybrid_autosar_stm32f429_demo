@@ -67,4 +67,4 @@ openocd -f /usr/local/share/openocd/scripts/board/stm32f429disc1.cfg -c 'program
 
 ### Circuit and BOM
 
-Look in the `circuit_and_bom` folder. You should find an up to date list of the components used and the circuit to build around the stm32f429 disco board. Please make a PR if you identify and fix errors.
+Look in the `schematic_and_bom` folder. You should find an up to date list of the components used and the circuit to build around the stm32f429 disco board. Please make a PR if you identify and fix errors.
